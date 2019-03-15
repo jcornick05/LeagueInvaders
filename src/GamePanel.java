@@ -9,21 +9,31 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 Timer timer; 
-
-GameObject go;
+final int MENU_STATE=0;
+final int GAME_STATE=1;
+final int END_STATE=2;
+int currentSTATE=MENU_STATE;
 @Override
 
 public void paintComponent(Graphics g){
-	 g.fillRect(10, 10, 100, 100);
-  
+     
         }
 @Override
 public void actionPerformed(ActionEvent e) {
-repaint();	
+
+	repaint();	
+	System.out.println("action");
+	if(currentSTATE == MENU_STATE){
+		currentSTATE=0;
+}else if(currentSTATE == GAME_STATE){
+     currentSTATE=1;
+}else if(currentSTATE== END_STATE){
+	currentSTATE=2;
+}
+
 }
 public GamePanel() {
 	timer= new Timer(1000/60,this);
-	go=new GameObject(10,10,10,10);
 }
 void startGame() {
 	timer.start();
@@ -42,5 +52,14 @@ public void keyPressed(KeyEvent e) {
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
 	System.out.println("Como estas?");
+}
+void drawMenuState(Graphics g) {
+	
+}
+void drawGameState(Graphics g) {
+	
+}
+void drawEndState(Graphics g) {
+	
 }
 }
