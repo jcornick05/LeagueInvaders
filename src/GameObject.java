@@ -8,12 +8,13 @@ public class GameObject {
     public GameObject(int x,int y,int width,int height) {
     	this.x=x;
     	this.y=y;
+    	this.width=width;
+    	this.height=height;
     }
     void update() {
-    	x+=1;
-    	y+=1;
+
     }
-    void draw(Graphics q) {
-    	q.fillRect(x, y, 20, 20);
+    void draw(Graphics g) {
+  
     }
 }

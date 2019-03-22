@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,59 +9,121 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener{
-Timer timer; 
-final int MENU_STATE=0;
-final int GAME_STATE=1;
-final int END_STATE=2;
-int currentSTATE=MENU_STATE;
-@Override
+public class GamePanel extends JPanel implements ActionListener, KeyListener {
+	Timer timer;
+	final int MENU_STATE = 0;
+	final int GAME_STATE = 1;
+	final int END_STATE = 2;
+	int currentSTATE = MENU_STATE;
+	Rocketship rocket = new Rocketship(250,700,50,50);
+	Font titleFont= new Font("Arial", Font.PLAIN, 48);
+Font description= new Font("Arial", Font.PLAIN, 30);
+	@Override
 
-public void paintComponent(Graphics g){
-     
-        }
-@Override
-public void actionPerformed(ActionEvent e) {
+	public void paintComponent(Graphics g) {
+		if (currentSTATE == MENU_STATE) {
+			drawMenuState(g);
+		} else if (currentSTATE == GAME_STATE) {
+			drawGameState(g);
 
-	repaint();	
-	System.out.println("action");
-	if(currentSTATE == MENU_STATE){
-		currentSTATE=0;
-}else if(currentSTATE == GAME_STATE){
-     currentSTATE=1;
-}else if(currentSTATE== END_STATE){
-	currentSTATE=2;
-}
+		} else if (currentSTATE == END_STATE) {
+			drawEndState(g);
 
-}
-public GamePanel() {
-	timer= new Timer(1000/60,this);
-}
-void startGame() {
-	timer.start();
-}
-@Override
-public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("hi");
-}
-@Override
-public void keyPressed(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("how are you?");
-}
-@Override
-public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("Como estas?");
-}
-void drawMenuState(Graphics g) {
+		}
+
+	}
 	
-}
-void drawGameState(Graphics g) {
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		repaint();
+		// System.out.println("action");
+		if (currentSTATE == MENU_STATE) {
+			updateMenuState();
+		} else if (currentSTATE == GAME_STATE) {
+			updateGameState();
+
+		} else if (currentSTATE == END_STATE) {
+			updateEndState();
+
+		}
+
+	}
+
+	public GamePanel() {
+		timer = new Timer(1000 / 60, this);
+	}
+
+	void startGame() {
+		timer.start();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		// System.out.println("hi");
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		// System.out.println("how are you?");
+		if (e.getKeyCode() == 10) {
+
+			currentSTATE++;
+			if (currentSTATE > END_STATE) {
+				currentSTATE = MENU_STATE;
+			}
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		// System.out.println("Como estas?");
+	}
+
+	void drawMenuState(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		g.setColor(Color.ORANGE);
+		g.setFont(titleFont);
+		g.drawString("LeagueInvaders", 100, 200);
+		g.setFont(description);
+		g.drawString("Press ENTER To start", 100, 400);
+		g.drawString("Press SPACE To start", 100, 600);
+		
+
+	}
+
+	void drawGameState(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		rocket.draw(g);
 	
-}
-void drawEndState(Graphics g) {
-	
-}
+	}
+
+	void drawEndState(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		g.setColor(Color.BLACK);
+		g.setFont(titleFont);
+		g.drawString("GAME OVER!!", 100, 300);
+
+	}
+
+	void updateMenuState() {
+
+	}
+
+	void updateGameState() {
+		rocket.update();
+	}
+
+	void updateEndState() {
+
+	}
+
 }
