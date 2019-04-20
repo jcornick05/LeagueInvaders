@@ -1,6 +1,6 @@
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
 
 public class LeagueInvaders {

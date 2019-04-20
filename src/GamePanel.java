@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
+	int score = 0;
 	int currentSTATE = MENU_STATE;
 
 	Rocketship rocket = new Rocketship(250, 700, 50, 50);
@@ -139,6 +140,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		om.update();
 		om.manageEnemies();
+		om.checkCollision();
+		om.purgeObjects();
+		if (rocket.isAlive=false) {
+			currentSTATE=END_STATE;
+		}
 	}
 
 	void updateEndState() {

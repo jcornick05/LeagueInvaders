@@ -59,4 +59,22 @@ public class ObjectManager {
 
 		}
 	}
+
+	public void checkCollision() {
+		for(Alien a : aliens){
+	        if(rocket.collisionBox.intersects(a.collisionBox)){
+	                rocket.isAlive = false;
+	        }
+	}
+		for(Alien a : aliens){
+			for(Projectile p : projectiles) {
+	        if(p.collisionBox.intersects(a.collisionBox)){
+	                a.isAlive = false;
+	        }
+	        }
+			
+			
+	}
+		
+	}
 }
