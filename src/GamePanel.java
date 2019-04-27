@@ -72,13 +72,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		// System.out.println("how are you?");
-		System.out.println(e.getKeyCode());
+		// System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 10) {
 
-			currentSTATE++;
+			if (currentSTATE == END_STATE) {
+				rocket = new Rocketship(250, 750, 50, 50);
+				om = new ObjectManager(rocket);
+				System.out.println("thing");
+			}
 			if (currentSTATE > END_STATE) {
 				currentSTATE = MENU_STATE;
 			}
+			currentSTATE++;
 
 		}
 		if (e.getKeyCode() == 39) {
@@ -142,8 +147,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.manageEnemies();
 		om.checkCollision();
 		om.purgeObjects();
-		if (rocket.isAlive=false) {
-			currentSTATE=END_STATE;
+		if (rocket.isAlive == false) {
+			currentSTATE = END_STATE;
 		}
 	}
 
